@@ -26,7 +26,7 @@ const network = new vis.Network(container, data, options);
 filterByLevel();
 
 
-
+// --------------------------------------以下は関数だけ。--------------------------------------
 /**
  * Filter nodes by their level and update the network visualization.
  */
