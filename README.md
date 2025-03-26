@@ -1,5 +1,4 @@
 - しばらくは [TODO](todo.md) を見ながら作業を進める。
-- requirements -> [pyproject.toml](pyproject.toml)
 - vis.jsを利用 [link](https://github.com/visjs/vis-network)
 
 --- 
