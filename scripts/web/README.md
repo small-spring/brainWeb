@@ -9,6 +9,11 @@
 - logic.js
   - 全てがここにつまっている。
 
+## todo
+- SearchManager.jsとmain.jsに分離する。
+  - main.js + NetworkManager.js + SearchManager.js の3ファイルだけ試験導入
+
+
 ---
 
 # Claude 3.5 Sonnet (Preview) の良さげな提案：
