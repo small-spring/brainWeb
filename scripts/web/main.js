@@ -50,38 +50,39 @@ function filterByLevel() {
     updateMatchList(maxLevel);
 }
 
-/**
- * Search for nodes by keyword and update the search results.
- */function searchNode() {
-    // 検索ボックスの値を取得し、小文字に変換
-    const keyword = document.getElementById("searchBox").value.toLowerCase();
+// SearchManager.jsのsearch()関数に移行
+// /**
+//  * Search for nodes by keyword and update the search results.
+//  */function searchNode() {
+//     // 検索ボックスの値を取得し、小文字に変換
+//     const keyword = document.getElementById("searchBox").value.toLowerCase();
 
-    if (keyword === "") {
-        // キーワードが空の場合、検索結果をクリア
-        matchResults = [];
-        matchIndex = 0;
-        clearSearch();
-        return;
-    }
+//     if (keyword === "") {
+//         // キーワードが空の場合、検索結果をクリア
+//         matchResults = [];
+//         matchIndex = 0;
+//         clearSearch();
+//         return;
+//     }
 
-    // キーワードに一致するノードをフィルタリング
-    matchResults = allNodes.get().filter(n =>
-        n.label.toLowerCase().includes(keyword) ||
-        (n.title && n.title.toLowerCase().includes(keyword))
-    );
+//     // キーワードに一致するノードをフィルタリング
+//     matchResults = allNodes.get().filter(n =>
+//         n.label.toLowerCase().includes(keyword) ||
+//         (n.title && n.title.toLowerCase().includes(keyword))
+//     );
 
-    if (matchResults.length > 0) {
-        matchIndex = 0;
-        const maxLevel = parseInt(document.getElementById("levelInput").value);
-        updateMatchList(maxLevel);  // リストの生成はここだけで行う
-        focusOnMatch();
-    } else {
-        const matchStatus = document.getElementById("matchStatus");
-        matchStatus.textContent = "No match";
-        document.getElementById("matchList").innerHTML = "";
-        alert("No match found.");
-    }
-}
+//     if (matchResults.length > 0) {
+//         matchIndex = 0;
+//         const maxLevel = parseInt(document.getElementById("levelInput").value);
+//         updateMatchList(maxLevel);  // リストの生成はここだけで行う
+//         focusOnMatch();
+//     } else {
+//         const matchStatus = document.getElementById("matchStatus");
+//         matchStatus.textContent = "No match";
+//         document.getElementById("matchList").innerHTML = "";
+//         alert("No match found.");
+//     }
+// }
 
 /**
  * Navigate to the previous match in the search results.
@@ -108,6 +109,7 @@ function nextMatch() {
 
 
 function focusOnMatch() {
+    // 検索結果のノードを選択し、フォーカスする
     const node = matchResults[matchIndex];
     const maxLevel = parseInt(document.getElementById("levelInput").value);
     
