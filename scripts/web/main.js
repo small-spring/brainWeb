@@ -68,7 +68,7 @@ function filterByLevel() {
     // キーワードに一致するノードをフィルタリング
     matchResults = allNodes.get().filter(n =>
         n.label.toLowerCase().includes(keyword) ||
-        (n.name && n.name.toLowerCase().includes(keyword))
+        (n.title && n.title.toLowerCase().includes(keyword))
     );
 
     if (matchResults.length > 0) {
