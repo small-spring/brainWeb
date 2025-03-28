@@ -2,9 +2,9 @@
 import { nodes } from "./data/nodes";
 import { edges } from "./data/edges";
 
-import { DataSet } from "vis";
+import { DataSet } from "vis-data";
 import { GraphManager } from "./GraphManager";
-import { UIStateManager } from "../../UIStateManager";
+import { UIStateManager } from "./UIStateManager";
 import { GraphNode, GraphEdge } from "./types";
 
 // ① UI状態管理
@@ -28,7 +28,6 @@ const graphManager = new GraphManager(container, allNodes, allEdges, ui);
 });
 
 (document.getElementById("filterBtn") as HTMLButtonElement)?.addEventListener("click", () => {
-    const state = ui.read();
     graphManager.updateDisplayDepthFromUI();
 });
 
