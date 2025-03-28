@@ -39,6 +39,7 @@ def collect_nodes_and_edges(node, base_level, level_limit, nodes, edges):
 
     nodes.append({
         "id": node["id"],
+        "label": node["name"], # ノードの中身の文字の表示に必要。
         "acronym": f"{node.get("acronym", "")}",
         "name": node["name"],
         "color": f"#{node.get('color_hex_triplet', 'CCCCCC')}",
