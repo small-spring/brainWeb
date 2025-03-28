@@ -81,6 +81,10 @@ export class GraphManager {
             nodes: new DataSet<GraphNode>(visibleNodes),
             edges: new DataSet<GraphEdge>(visibleEdges)
         });
+        // add this lines
+        this.network.stopSimulation();
+        setTimeout(() => this.network.startSimulation(), 1000);
+        // ^^^
 
         this.searchManager.updateVisibility(node => this.isNodeVisible(node));
     }
