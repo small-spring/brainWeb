@@ -11,19 +11,35 @@
 
 <body>
     <div id="controls">
-        <label for="levelInput">Max Level:</label>
-        <input id="levelInput" type="number" min="0" max="20" value="3">
-        <button onclick="filterByLevel()">Apply</button>
+        <!-- Root control -->
+        <div class="control-group">
+            <label for="rootId">Root Node ID:</label>
+            <input id="rootId" type="number" min="1" value="997", class="digit-3-input">
+            <button onclick="setRoot()">Set Root</button>
+            <div class="root-info">
+                <span id="rootName">rootName</span>
+                <span id="rootAcronym">rootAcronym</span>
+            </div>
+        </div>
+
+        <!--- filter by level -->
+        <div class="control-group">
+            <label for="levelInput">Display Depth:</label>
+            <input id="levelInput" type="number" min="0" max="20" value="3", class="digit-3-input">
+            <button onclick="filterByLevel()">Apply</button>
+        </div>
 
         <!-- search box -->
-        <label for="searchBox"> Search:</label>
-        <input type="text" id="searchBox" placeholder="Name or acronym">
-        <button onclick="searchNode()">Search</button>
-        <button onclick="prevMatch()">Back</button>
-        <button onclick="nextMatch()">Next</button>
-        <button onclick="clearSearch()">Clear</button>
-        <span id="matchStatus" style="margin-left: 8px;"></span>
-        <ul id="matchList" style="padding-left: 1em;"></ul>
+        <div class="control-group">
+            <label for="searchBox"> Search:</label>
+            <input type="text" id="searchBox" placeholder="Name or acronym">
+            <button onclick="searchNode()">Search</button>
+            <button onclick="prevMatch()">Back</button>
+            <button onclick="nextMatch()">Next</button>
+            <button onclick="clearSearch()">Clear</button>
+            <span id="matchStatus" style="margin-left: 8px;"></span>
+            <ul id="matchList" style="padding-left: 1em;"></ul>
+        </div>
     </div>
     <div id="mynetwork"></div>
 

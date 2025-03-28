@@ -26,6 +26,19 @@ body {
     gap: 6px;
 }
 
+.root-info {
+    color: #666;
+    font-style: italic;
+}
+
+.digit-3-input::-webkit-inner-spin-button {
+    width: 75px;  /* 3桁の数字が丁度入るサイズ = 50px */
+    text-align: center;  /* 数字を右寄せ */
+    padding: 4px 6px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+}
+
 #mynetwork {
     flex: 1 1 auto;
     /* 残り全体を使う */
