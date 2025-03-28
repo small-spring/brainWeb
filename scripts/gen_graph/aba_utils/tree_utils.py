@@ -1,21 +1,21 @@
-def find_node_by_id(node, target_id):
-    """
-    Recursively search for a node with the given ID in the ABA structure tree.
+# def find_node_by_id(node, target_id):
+#     """
+#     Recursively search for a node with the given ID in the ABA structure tree.
 
-    Args:
-        node (dict): The current node to search from.
-        target_id (int): The ID of the target structure.
+#     Args:
+#         node (dict): The current node to search from.
+#         target_id (int): The ID of the target structure.
 
-    Returns:
-        dict or None: The node dict if found, otherwise None.
-    """
-    if node["id"] == target_id:
-        return node
-    for child in node.get("children", []):
-        result = find_node_by_id(child, target_id)
-        if result:
-            return result
-    return None
+#     Returns:
+#         dict or None: The node dict if found, otherwise None.
+#     """
+#     if node["id"] == target_id:
+#         return node
+#     for child in node.get("children", []):
+#         result = find_node_by_id(child, target_id)
+#         if result:
+#             return result
+#     return None
 
 def collect_nodes_and_edges(node, base_level, level_limit, nodes, edges):
     """
