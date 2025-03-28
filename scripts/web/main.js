@@ -28,7 +28,6 @@ filterByLevel();
 
 
 //以下は関数・クラス
-// ...existing code...
 
 // --------------------------------------Root Node関連-------------------------------------
 /**
@@ -84,6 +83,11 @@ function updateRootInfo(node) {
     document.getElementById("rootName").textContent = node.label || '';
     document.getElementById("rootAcronym").textContent = 
         node.acronym ? `(${node.acronym})` : '';
+
+    // 存在するがisVisibleではない → 「レベルxに存在」を表示する。
+    // 存在しない場合は does not exist と表示
+
+    //
 }
 
 // 初期表示時のルート情報を設定
@@ -117,7 +121,7 @@ function filterByLevel() {
 }
 
 
-// --------------------------------------以下はSearchManager.jsの内容--------------------------------------
+// --------------------------------------検索関連--------------------------------------
 /**
  * Search for nodes by keyword and update the search results.
  */function searchNode() {
@@ -134,8 +138,8 @@ function filterByLevel() {
 
     // キーワードに一致するノードをフィルタリング
     matchResults = allNodes.get().filter(n =>
-        n.label.toLowerCase().includes(keyword) ||
-        (n.title && n.title.toLowerCase().includes(keyword))
+        (n.acronym && n.acronym.toLowerCase().includes(keyword)) ||
+        (n.name && n.name.toLowerCase().includes(keyword)) 
     );
 
     if (matchResults.length > 0) {
