@@ -11,3 +11,10 @@ wheels/
 
 # Custom
 archive/
+
+# Node.js
+node_modules/
+
+# 依存関係管理ファイル（package-lock.json または yarn.lock）
+!package-lock.json
+!yarn.lock
