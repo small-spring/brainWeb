@@ -39,10 +39,11 @@ def collect_nodes_and_edges(node, base_level, level_limit, nodes, edges):
 
     nodes.append({
         "id": node["id"],
-        "label": node["name"],
-        "level": relative_level,
+        "acronym": f"{node.get("acronym", "")}",
+        "name": node["name"],
         "color": f"#{node.get('color_hex_triplet', 'CCCCCC')}",
-        "title": f"{node.get('acronym', '')} (Level {relative_level})"
+        "level": relative_level,
+        "title": f"{node.get('acronym', '')} (Level {relative_level})" # todo: 消したい
     })
 
     for child in node.get("children", []):
