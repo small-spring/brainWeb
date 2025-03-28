@@ -14,6 +14,92 @@
   - main.js + NetworkManager.js + SearchManager.js の3ファイルだけ試験導入
 
 
+
+## UI
+- `control` コンポーネント
+    - ノードの検索
+        - 検索ボックスに何も入れずに検索すると
+            - （Enterを押す or Search ボタンを押す）とフォーカス・検索結果リストがリセットされる。
+        - 検索ボックスに文字列を入れると、
+            - 部分一致を全部リストしてくれる。
+            - そのリストのうち、グラフ上に表示されていないものは灰色(Opacityで管理)・ホバーしても何も起こらない。
+            - グラフ上に表示されている場合、太字・黒字・クリック可能で、クリックするとそれに飛ぶ。
+            - リストはlevel順にソートされている。
+            - 検索結果リストの中に、1つのでもisVisibleがある
+                - 検索直後はリストの一番上にフォーカスする。
+                - Next, Prevボタンが現れ、それを押す or 方向キー入力 で次、前の結果へ移動
+                - 検索結果 かつ isVisible の中をぐるぐる回る。
+            - ないとき
+                - フォーカスせず、クリック不可なリストができる。
+    - rootの制御
+        - idを入力→set rootボタンを押す or 好きなisVisibleノードを選んで右クリック→rootに設定をすると、root以下のグラフだけを表示するようになる。
+        - デフォルト値が入力されたボックスがあり、はじめはそれが参照される。
+        - idを入力するボックスと、それの横に name (acronym) が表示される
+        - デフォルト値が設定されている。
+    - レベルの制御
+        - デフォルト値が入力されたボックスがあり、はじめはそれが参照される。
+        - rootから何個子ノードを表示するかの数字。
+        - level: 3ならroot含めて3階層表示される。
+        - int？で入力し、set level とかにする。
+    - グラフ上に表示されているかの判定
+        - まず、rootの子孫であることで絞る `isOffspring`? より良い単語があればそれを使う
+        - 次に、rootから何level表示しているか `numLevel`? によって、表示されているかどうかを判定する。
+- `network` コンポーネント
+    - グラフが描画される。
+    - 各ノードは、ノードの`color` フィールドに基づいた色分けがされている。
+-  ノードの選択
+        - 興味があるノードをクリック/右クリック→詳細を表示？すると、右サイドバーが出てきてノードの情報（名前、略称、id、など）を表示してくれる。
+        - これ検索結果リストの形式に合わせるのもあり。1つ検索した、みたいな表示をするのでも良い。
+
+
+## データ型
+### ● Node
+```ts
+type Node = {
+    id: number;           // ユニークな識別子
+    acronym: string;
+    name: string;        // 正式名称
+    color: string;       // 可視化用カラーコード
+    level: number;        // ツリーの階層（0がroot）
+}
+```
+### ● Edge
+```ts
+type Edge = {
+    from: number;         // 親ノードのid
+    to: number;           // 子ノードのid
+}
+```
+
+### ● DisplayState型
+```ts
+type DisplayState = {
+    rootId: number;                     // 現在のroot
+    baseLevel: number;                 // rootのlevel
+    levelLimit: number;               // 表示階層数
+    visibleNodeIdSet: Set<number>;    // root以下の表示ノードID（子孫+level制限を満たす）
+}
+```
+
+### ● SearchState
+```ts
+type SearchState = {
+    matchResults: Node[];
+    matchIndex: number;
+    visibleMatchIndexes: number[];
+}
+```
+### ● UserInput
+```ts
+type UserInput = {
+    levelLimit: number;
+    searchKeyword: string;
+    rootId: number;
+}
+```
+
+
+
 ---
 
 # Claude 3.5 Sonnet (Preview) の良さげな提案：
