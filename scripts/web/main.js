@@ -26,15 +26,81 @@ const network = new vis.Network(container, data, options);
 filterByLevel();
 
 
-// --------------------------------------以下は関数だけ。--------------------------------------
+
+//以下は関数・クラス
+// ...existing code...
+
+// --------------------------------------Root Node関連-------------------------------------
+/**
+ * ルートノードを設定し、表示を更新する
+ */
+function setRoot() {
+    const rootId = parseInt(document.getElementById("rootId").value);
+    const rootNode = allNodes.get(rootId);
+
+    if (!rootNode) {
+        alert("無効なノードIDです");
+        return;
+    }
+
+    // ルート情報を更新
+    updateRootInfo(rootNode);
+    
+    // 子孫ノードを収集してフィルタリング
+    const descendants = collectDescendantIds(rootId, allEdges);
+    const displayDepth = parseInt(document.getElementById("levelInput").value);
+    
+    // 表示するノードをフィルタリング
+    const visibleNodes = allNodes.get().filter(node => 
+        descendants.has(node.id) && node.level <= displayDepth
+    );
+
+    // エッジをフィルタリング
+    const visibleNodeIds = new Set(visibleNodes.map(n => n.id));
+    const visibleEdges = allEdges.get().filter(e => 
+        visibleNodeIds.has(e.from) && visibleNodeIds.has(e.to)
+    );
+
+    // ネットワークを更新
+    network.setData({
+        nodes: new vis.DataSet(visibleNodes),
+        edges: new vis.DataSet(visibleEdges)
+    });
+
+    // 検索結果リストを更新
+    updateMatchList(displayDepth);
+
+    // ルートノードにフォーカス
+    network.focus(rootId, {
+        scale: 1.0,
+        animation: { duration: 1000 }
+    });
+}
+
+/**
+ * ルートノードの情報を表示エリアに更新
+ */
+function updateRootInfo(node) {
+    document.getElementById("rootName").textContent = node.label || '';
+    document.getElementById("rootAcronym").textContent = 
+        node.acronym ? `(${node.acronym})` : '';
+}
+
+// 初期表示時のルート情報を設定
+const initialRootId = parseInt(document.getElementById("rootId").value);
+updateRootInfo(allNodes.get(initialRootId));
+
+
+
+// --------------------------------------Display Depth 関連-------------------------------------
 /**
  * Filter nodes by their level and update the network visualization.
  */
 function filterByLevel() {
     // 入力された最大レベルを取得
-    const maxLevel = parseInt(document.getElementById("levelInput").value);
+    const displayDepth = parseInt(document.getElementById("levelInput").value);
     // 最大レベル以下のノードをフィルタリング
-    const visibleNodes = allNodes.get().filter(n => n.level <= maxLevel);
+    const visibleNodes = allNodes.get().filter(n => n.level <= displayDepth);
     // フィルタリングされたノードのIDをセットにする
     const visibleIds = new Set(visibleNodes.map(n => n.id));
     // フィルタリングされたノードに関連するエッジをフィルタリング
@@ -47,10 +113,11 @@ function filterByLevel() {
     });
   
     // リストの再作成
-    updateMatchList(maxLevel);
+    updateMatchList(displayDepth);
 }
 
-// SearchManager.jsのsearch()関数に移行
+
+// --------------------------------------以下はSearchManager.jsの内容--------------------------------------
 /**
  * Search for nodes by keyword and update the search results.
  */function searchNode() {
@@ -147,12 +214,7 @@ function clearSearch() {
     network.unselectAll();
 }
 
-/**
- * ノードの可視性を判定する関数
- */
-function isVisible(node, maxLevel) {
-    return node.level <= maxLevel;
-}
+
 
 /**
  * 検索結果リストを更新する  
@@ -209,18 +271,49 @@ function updateMatchList(maxLevel) {
         matchList.appendChild(li);
     });
 }
+// 描画されるノードのID取得。
+/**
+ * 指定されたノードの子孫のIDを収集する
+ * @param {number} rootId - ルートノードのID
+ * @param {vis.DataSet} edges - エッジのデータセット
+ * @returns {Set<number>} - 子孫ノードのIDのセット
+ */
+function collectDescendantIds(rootId, edges) {
+    const descendants = new Set();
+    const queue = [rootId];
 
-// // キーボードイベントのハンドリングを追加
-// document.getElementById("searchBox").addEventListener("keydown", function (event) {
-//     if (event.key === "Enter") {
-//         searchNode();
-//     } else if (event.key === "ArrowDown" || event.key === "ArrowRight") {
-//         event.preventDefault();  // デフォルトのスクロール動作を防止
-//         nextMatch();
-//     } else if (event.key === "ArrowUp" || event.key === "ArrowLeft") {
-//         event.preventDefault();  // デフォルトのスクロール動作を防止
-//         prevMatch();
-//     } else if (event.key === "Escape") {
-//         clearSearch();
-//     }
-// });
+    while (queue.length > 0) {
+        const currentId = queue.shift();
+        descendants.add(currentId);
+
+        edges.get().forEach(edge => {
+            if (edge.from === currentId && !descendants.has(edge.to)) {
+                queue.push(edge.to);
+            }
+        });
+    }
+
+    return descendants;
+}
+
+/**
+ * ノードが指定されたレベル範囲内かどうかを判定
+ * @param {Object} node - 判定対象のノード
+ * @param {number} baseLevel - 基準となるレベル
+ * @param {number} levelLimit - レベルの制限値
+ * @returns {boolean} - レベル範囲内ならtrue
+ */
+function isWithinLevel(node, baseLevel, levelLimit) {
+    return node.level <= baseLevel + levelLimit;
+}
+
+/**
+ * ノードが表示可能かどうかを判定
+ * @param {Object} node - 判定対象のノード
+ * @param {Set<number>} descendants - 子孫ノードのIDセット
+ * @param {number} displayDepth - 表示する深さ
+ * @returns {boolean} - 表示可能ならtrue
+ */
+function isVisible(node, descendants, displayDepth) {
+    return descendants.has(node.id) && node.level <= displayDepth;
+}
