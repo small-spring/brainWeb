@@ -23,14 +23,13 @@ Dependencies:
 """
 
 import json
-from aba_utils import find_node_by_id, collect_nodes_and_edges
+from aba_utils import collect_nodes_and_edges
 
 # ---------------------
 # Configuration
 # ---------------------
 JSON_PATH = "./aba_structures.json"
-START_ID = 8
-LEVEL_LIMIT = 10 # todo include LEVEL_LIMIT in the output
+LEVEL_LIMIT = 20
 OUTPUT_NODES_PATH = "../web/data/nodes.js"
 OUTPUT_EDGES_PATH = "../web/data/edges.js"
 
@@ -43,8 +42,7 @@ with open(JSON_PATH, "r", encoding="utf-8") as f:
 nodes = []
 edges = []
 
-root = data["msg"][0]
-start_node = find_node_by_id(root, START_ID)
+start_node =  data["msg"][0]
 
 if start_node:
     BASE_LEVEL = start_node["st_level"]
@@ -60,4 +58,4 @@ if start_node:
     print(" -", OUTPUT_NODES_PATH)
     print(" -", OUTPUT_EDGES_PATH)
 else:
-    print(f"Structure ID {START_ID} not found.")
+    print("start_node was not found.")
