@@ -21,7 +21,7 @@ export type GraphNode = {
 
 // グラフエッジの定義
 export type GraphEdge = {
-    id: number,
+    id?: number;
     from: number;
     to: number;
 };

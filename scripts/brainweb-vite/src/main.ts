@@ -2,7 +2,7 @@
 import { nodes } from "./data/nodes";
 import { edges } from "./data/edges";
 
-import { DataSet } from "vis-data";
+import { DataSet } from "vis";
 import { GraphManager } from "./GraphManager";
 import { UIStateManager } from "./UIStateManager";
 import { GraphNode, GraphEdge } from "./types";
