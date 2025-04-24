@@ -49,11 +49,13 @@ Copyright © 2025 Allen Institute for Brain Science.
 Used under CC BY 4.0 license.
 ```
 
-## 📚 データ出典
+## 📖 References
 
 本ツールの構造情報（ノード・エッジ）は、Allen Institute 提供の脳構造階層データを使用・再構成しています：
 
-- [Allen Mouse Brain Atlas – Allen Institute for Brain Science](https://portal.brain-map.org/)
-- データライセンス: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
-
-
+- Allen Institute for Brain Science. (2004). Allen Mouse Brain Atlas [dataset]. Available from: https://mouse.brain-map.org
+- Allen Institute for Brain Science. (2011). Allen Reference Atlas – Mouse Brain [brain atlas]. Available from: https://atlas.brain-map.org
+- Daigle, T. L., et al. (2018). A suite of transgenic driver and reporter mouse lines with enhanced brain-cell-type targeting and functionality. Cell, 174(2), 465–480.e22. https://doi.org/10.1016/j.cell.2018.06.035
+- Lein, E. S., et al. (2007). Genome-wide atlas of gene expression in the adult mouse brain. Nature, 445, 168–176. https://doi.org/10.1038/nature05453
+- Harris, J. A., et al. (2019). Hierarchical organization of cortical and thalamic connectivity. Nature, 575, 195–202. https://doi.org/10.1038/s41586-019-1716-z
+- Oh, S. W., et al. (2014). A mesoscale connectome of the mouse brain. Nature, 508, 207–214. https://doi.org/10.1038/nature13186
