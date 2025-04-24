@@ -1,5 +1,4 @@
-import { DataSet } from "vis-data";
-import { Network } from "vis-network";
+import { Network, DataSet } from "vis";
 
 import { GraphNode, GraphEdge } from "./types";
 import { SearchManager } from "./SearchManager";
@@ -8,6 +7,7 @@ import { UIStateManager } from "./UIStateManager";
 export class GraphManager {
     private network: Network;
     private allNodes: DataSet<GraphNode>;
+
     private allEdges: DataSet<GraphEdge>;
     private searchManager: SearchManager;
     private rootId: number;

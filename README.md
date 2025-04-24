@@ -23,11 +23,6 @@ WIP
 
 ## 🖥 使い方
 WIP
-1. `web` ディレクトリをダウンロード
-2. `brain_graph_interactive.html` をブラウザで開く
-3. 以下の操作が可能：
-   - Max Level を指定して `Apply` を押すと表示階層を制限
-   - 検索もできる
 
 ---
 
@@ -40,14 +35,6 @@ WIP
 
 ---
 
-## 📄 ライセンス
-WIP
-
-参考：Allenが
-```
-Copyright © 2025 Allen Institute for Brain Science. 
-Used under CC BY 4.0 license.
-```
 
 ## 📖 References
 

@@ -9,10 +9,12 @@
     "preview": "vite preview"
   },
   "devDependencies": {
+    "@types/vis": "^4.21.27",
     "typescript": "~5.7.2",
     "vite": "^6.2.0"
   },
   "dependencies": {
+    "vis": "^4.21.0",
     "vis-data": "^7.1.9",
     "vis-network": "^9.1.9"
   }
