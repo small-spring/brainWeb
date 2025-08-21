@@ -1,4 +1,4 @@
-site -> (https://small-spring.github.io/brainWeb/)(https://small-spring.github.io/brainWeb/)
+site -> [https://small-spring.github.io/brainWeb/](https://small-spring.github.io/brainWeb/)
 - しばらくは [TODO](todo.md) を見ながら作業を進める。
 - vis.jsを利用 [link](https://github.com/visjs/vis-network)
 
